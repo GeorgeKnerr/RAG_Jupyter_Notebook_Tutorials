@@ -1,11 +1,11 @@
+@echo off
+
 REM Windows Jupyter Lab Server Startup Script
 REM Usage: Windows_Start_Jupyter_Server.bat [ROOT_DIR] [MINICONDA_SCRIPTS_DIR] [CONDA_ENV]
 REM   ROOT_DIR: Directory to start Jupyter Lab in or default to default values below.
 REM   MINICONDA_SCRIPTS_DIR: Path to miniconda Scripts directory or default to default values below.
 REM   CONDA_ENV: Conda environment to activate or default to default values below.
 REM Example: Windows_Start_Jupyter_Server.bat "C:\my\project" "C:\miniconda3\Scripts" "myenv"
-
-@echo off
 
 REM Set default values
 set "DEFAULT_ROOT_DIR=C:\<path>\rag_jupyter_notebook_tutorials"

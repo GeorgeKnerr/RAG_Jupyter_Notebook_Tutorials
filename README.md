@@ -43,7 +43,7 @@ pip install jupyterlab
 ### Starting Jupyter Lab
 
 #### Windows
-Use the provided batch script (recommended):
+Use the provided batch script (customize paths first):
 ```bash
 Windows_Start_Jupyter_Lab_Server.bat
 ```
@@ -55,19 +55,19 @@ The `Windows_Start_Jupyter_Lab_Server.bat` file is a convenient startup script t
 - Starts Jupyter Lab with no browser and disabled authentication
 - Accepts command line arguments for customization
 
+**Important:** Before using the batch script, you need to customize the default paths in the script to match your system:
+- Edit `DEFAULT_ROOT_DIR` to point to your project directory
+- Edit `DEFAULT_MINICONDA_SCRIPTS_DIR` to point to your conda Scripts folder
+- Set `DEFAULT_CONDA_ENV` to your conda environment name
+
 **Usage:**
 ```bash
-# Use default settings (configured in the script)
+# Use default settings (after customizing the script)
 Windows_Start_Jupyter_Lab_Server.bat
 
-# Customize root directory, conda scripts path, and environment
+# Or provide paths as command line arguments
 Windows_Start_Jupyter_Lab_Server.bat "C:\your\project\path" "C:\your\miniconda3\Scripts" "your_env_name"
 ```
-
-**Script Parameters:**
-- `ROOT_DIR`: Directory where Jupyter Lab will start (default: current project directory)
-- `MINICONDA_SCRIPTS_DIR`: Path to your miniconda Scripts folder (default: `C:\Users\gknerr\miniconda3\Scripts`)
-- `CONDA_ENV`: Conda environment to activate (default: `langchain_common_py3.12`)
 
 Or start manually:
 ```bash
@@ -134,7 +134,10 @@ import sys
 required_modules = [
     'langchain',
     'langchain_community',
+    'langchain_text_splitters',
     'fitz',  # PyMuPDF (imported as fitz)
+    'nltk',  # Natural Language Toolkit for sentence tokenization
+    'gensim',  # For Word2Vec embeddings
     'os',
     'pandas',
     'numpy'
@@ -164,16 +167,21 @@ Create a `requirements.txt` file and install dependencies:
 # Create requirements.txt with the following content:
 # langchain
 # langchain-community
+# langchain-text-splitters
+# langchain_openai
 # PyMuPDF
+# nltk
+# gensim
 # pandas
 # numpy
-# jupyter
+# jupyterlab
+# openai
 
 # Install all requirements
 pip install -r requirements.txt
 
 # Or install individually
-pip install langchain langchain-community PyMuPDF pandas numpy jupyter
+pip install langchain langchain-community langchain-text-splitters langchain_openai PyMuPDF nltk gensim pandas numpy jupyterlab openai
 ```
 
 ### Using Conda Environment (Recommended)
@@ -185,10 +193,13 @@ conda create -n langchain_common_py3.12 python=3.12
 conda activate langchain_common_py3.12
 
 # Install available packages using conda-forge
-conda install -c conda-forge langchain pandas numpy jupyterlab
+conda install -c conda-forge langchain nltk pandas numpy jupyterlab
 
 # Install packages via pip (not available in conda-forge)
-pip install langchain-community PyMuPDF
+pip install langchain-community langchain-text-splitters PyMuPDF gensim openai langchain_openai
+
+# Download required NLTK data
+python -c "import nltk; nltk.download('punkt')"
 ```
 
 **Note about langchain-community and PyMuPDF:** These packages are not available through conda-forge, so they must be installed using pip even within a conda environment. This is a common pattern for specialized packages.
@@ -205,7 +216,7 @@ rag_tutorials_env\Scripts\activate
 source rag_tutorials_env/bin/activate
 
 # Install dependencies
-pip install langchain langchain-community PyMuPDF pandas numpy jupyterlab
+pip install langchain langchain-community PyMuPDF nltk gensim pandas numpy jupyterlab langchain_openai
 ```
 
 ### Alternative: Using uv (Fast Python Package Manager)
@@ -225,37 +236,84 @@ rag_tutorials_env\Scripts\activate
 source rag_tutorials_env/bin/activate
 
 # Install dependencies with uv (much faster than pip)
-uv pip install langchain langchain-community PyMuPDF pandas numpy jupyterlab
+uv pip install langchain langchain-community PyMuPDF nltk gensim pandas numpy jupyterlab langchain_openai
 ```
 
 ## Notebook Index
 
-### 1. Reading PDF and Chunking Tutorial
+### 1. Reading PDF and Page Chunking Tutorial
 **File:** `reading_pdf_chunking_tutorial.ipynb`
 
 **Description:** Learn the fundamentals of PDF processing for RAG systems. This beginner-friendly tutorial covers:
 - Loading PDF documents using LangChain's PyMuPDFLoader
 - Extracting text content page by page
-- Understanding automatic document chunking
+- Understanding automatic page-based document chunking
 - Inspecting document metadata
 - Working with Document objects for downstream processing
 
 **Key Concepts:**
 - PDF text extraction
-- Document chunking strategies
+- Page-based chunking
 - Metadata preservation
 - LangChain document loaders
 
-**Prerequisites:** Basic Python knowledge
+**Prerequisites:** Basic Python knowledge  
 **Estimated Time:** 15-20 minutes
+
+### 2. Data Chunking Tutorial
+**File:** `data_chunking_tutorial.ipynb`
+
+**Description:** Explore advanced text chunking strategies for RAG systems. This intermediate tutorial covers:
+- Fixed-size chunking with CharacterTextSplitter
+- Recursive chunking with RecursiveCharacterTextSplitter
+- Sentence-based chunking using NLTK
+- Semantic chunking by paragraph boundaries
+- Comparing different chunking methods and their trade-offs
+- Hands-on activity with customizable parameters
+
+**Key Concepts:**
+- Text splitting strategies
+- Chunk size and overlap optimization
+- Context preservation techniques
+- Semantic boundary detection
+
+**Prerequisites:** Basic Python knowledge, completion of Reading PDF tutorial recommended  
+**Estimated Time:** 30-40 minutes
+
+### 3. Documents to Embeddings Tutorial
+**File:** `documents_to_embeddings_tutorial.ipynb`
+
+**Description:** Learn how to convert text documents and chunks into vector embeddings for semantic search and retrieval. This tutorial covers:
+- What embeddings are and why they matter for RAG
+- Generating embeddings using Word2Vec and OpenAI's API
+- Comparing embedding strategies and their outputs
+- Preparing data for vector-based retrieval
+
+**Key Concepts:**
+- Word embeddings
+- Semantic search
+- Vector databases
+- LangChain/OpenAI integration
+
+**Prerequisites:** Completion of chunking tutorials recommended  
+**Estimated Time:** 30-40 minutes
 
 ## Getting Started
 
 1. Clone this repository
 2. Set up your Python environment using the instructions above
 3. Install required dependencies
-4. Start Jupyter Lab using the provided batch script (Windows) or command line
-5. Open the desired notebook and follow along
+4. Download required NLTK data: `python -c "import nltk; nltk.download('punkt')"`
+5. Customize the batch script paths (Windows) or prepare your environment
+6. Start Jupyter Lab using the provided batch script (Windows) or command line
+7. Open the desired notebook and follow along
+
+## Sample Data
+
+The tutorials reference sample PDF files that you should provide:
+- Place your PDF files in a `data/` directory
+- Update the file paths in the notebooks to match your files
+- Use the medical PDF resources listed in the notebooks for sample documents
 
 ## Resources
 
