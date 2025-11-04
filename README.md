@@ -2,6 +2,67 @@
 
 A collection of hands-on tutorials for building Retrieval Augmented Generation (RAG) systems using Jupyter notebooks. These tutorials cover fundamental concepts like PDF processing, text chunking, embeddings, and vector databases.
 
+## Notebook Index
+
+### 1. Reading PDF and Page Chunking Tutorial
+**File:** `reading_pdf_chunking_tutorial.ipynb`
+
+**Description:** Learn the fundamentals of PDF processing for RAG systems. This beginner-friendly tutorial covers:
+- Loading PDF documents using LangChain's PyMuPDFLoader
+- Extracting text content page by page
+- Understanding automatic page-based document chunking
+- Inspecting document metadata
+- Working with Document objects for downstream processing
+
+**Key Concepts:**
+- PDF text extraction
+- Page-based chunking
+- Metadata preservation
+- LangChain document loaders
+
+**Prerequisites:** Basic Python knowledge  
+**Estimated Time:** 15-20 minutes
+
+### 2. Data Chunking Tutorial
+**File:** `data_chunking_tutorial.ipynb`
+
+**Description:** Explore advanced text chunking strategies for RAG systems. This intermediate tutorial covers:
+- Fixed-size chunking with CharacterTextSplitter
+- Recursive chunking with RecursiveCharacterTextSplitter
+- Sentence-based chunking using NLTK
+- Semantic chunking by paragraph boundaries
+- Comparing different chunking methods and their trade-offs
+- Hands-on activity with customizable parameters
+
+**Key Concepts:**
+- Text splitting strategies
+- Chunk size and overlap optimization
+- Context preservation techniques
+- Semantic boundary detection
+
+**Prerequisites:** Basic Python knowledge, completion of Reading PDF tutorial recommended  
+**Estimated Time:** 30-40 minutes
+
+### 3. Documents to Embeddings Tutorial
+**File:** `documents_to_embeddings_tutorial.ipynb`
+
+**Description:** Learn how to convert text documents and chunks into vector embeddings for semantic search and retrieval. This tutorial covers:
+- What embeddings are and why they matter for RAG
+- Generating embeddings using Word2Vec and OpenAI's API
+- Comparing embedding strategies and their outputs
+- Preparing data for vector-based retrieval
+
+**Key Concepts:**
+- Word embeddings
+- Semantic search
+- Vector databases
+- LangChain/OpenAI integration
+
+**Prerequisites:** Completion of chunking tutorials recommended  
+**Estimated Time:** 30-40 minutes
+
+---
+
 ## Setup Instructions
 
 ### Prerequisites
@@ -79,6 +140,8 @@ jupyter lab --no-browser --port=8888
 jupyter lab --no-browser --port=8888
 ```
 
+---
+
 ## Connecting to Jupyter Lab Server
 
 After starting the Jupyter Lab server using the batch script or command line, you'll need to connect to it through your web browser. Here's how:
@@ -121,6 +184,8 @@ The server will display URLs like:
 - To stop the server, press `Ctrl+C` in the terminal
 - The server URL includes `localhost` or `127.0.0.1` - this means it's only accessible from your local machine
 - If you need to restart the server, just run the batch script again
+
+---
 
 ## Python Dependencies
 
@@ -239,64 +304,7 @@ source rag_tutorials_env/bin/activate
 uv pip install langchain langchain-community PyMuPDF nltk gensim pandas numpy jupyterlab langchain_openai
 ```
 
-## Notebook Index
-
-### 1. Reading PDF and Page Chunking Tutorial
-**File:** `reading_pdf_chunking_tutorial.ipynb`
-
-**Description:** Learn the fundamentals of PDF processing for RAG systems. This beginner-friendly tutorial covers:
-- Loading PDF documents using LangChain's PyMuPDFLoader
-- Extracting text content page by page
-- Understanding automatic page-based document chunking
-- Inspecting document metadata
-- Working with Document objects for downstream processing
-
-**Key Concepts:**
-- PDF text extraction
-- Page-based chunking
-- Metadata preservation
-- LangChain document loaders
-
-**Prerequisites:** Basic Python knowledge  
-**Estimated Time:** 15-20 minutes
-
-### 2. Data Chunking Tutorial
-**File:** `data_chunking_tutorial.ipynb`
-
-**Description:** Explore advanced text chunking strategies for RAG systems. This intermediate tutorial covers:
-- Fixed-size chunking with CharacterTextSplitter
-- Recursive chunking with RecursiveCharacterTextSplitter
-- Sentence-based chunking using NLTK
-- Semantic chunking by paragraph boundaries
-- Comparing different chunking methods and their trade-offs
-- Hands-on activity with customizable parameters
-
-**Key Concepts:**
-- Text splitting strategies
-- Chunk size and overlap optimization
-- Context preservation techniques
-- Semantic boundary detection
-
-**Prerequisites:** Basic Python knowledge, completion of Reading PDF tutorial recommended  
-**Estimated Time:** 30-40 minutes
-
-### 3. Documents to Embeddings Tutorial
-**File:** `documents_to_embeddings_tutorial.ipynb`
-
-**Description:** Learn how to convert text documents and chunks into vector embeddings for semantic search and retrieval. This tutorial covers:
-- What embeddings are and why they matter for RAG
-- Generating embeddings using Word2Vec and OpenAI's API
-- Comparing embedding strategies and their outputs
-- Preparing data for vector-based retrieval
-
-**Key Concepts:**
-- Word embeddings
-- Semantic search
-- Vector databases
-- LangChain/OpenAI integration
-
-**Prerequisites:** Completion of chunking tutorials recommended  
-**Estimated Time:** 30-40 minutes
+---
 
 ## Getting Started
 
